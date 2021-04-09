@@ -96,8 +96,10 @@ public class Main {
         graph.newEdge(slagelse, sorø, 14);
 
         //graph.printGraph();
-        graph.MSTPrims();
-        graph.printMST();
+        //graph.MSTPrims();
+        //graph.printMST2();
+				graph.PrimsMST2();
+			
     }
 }
 
