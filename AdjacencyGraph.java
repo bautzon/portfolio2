@@ -37,7 +37,7 @@ public class AdjacencyGraph {
 		}
 	}
 
-	// Sætter start distances lig med 0, og adderer distancen fra get(i) til
+
 	public void PrimsMST2() {
 		
 
