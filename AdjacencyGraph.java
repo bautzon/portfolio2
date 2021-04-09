@@ -66,7 +66,8 @@ public class AdjacencyGraph {
 				}
 			MST += u.distance;
 		}
-		System.out.println("Minimum spanning tree Distance: " + MST);
+		int finalPrice = MST * 100000;
+		System.out.println("Weight of the MST is: " + MST + "km \n" + "The final price of the grid is: " + finalPrice + "kr \n");
 		for (int i = 0; i < vertices.size(); i++) {
 			if (vertices.get(i).predecessor != null)
 				System.out.println(" parent " + vertices.get(i).predecessor.getName() + " to " + vertices.get(i).getName() + " EdgeWeight: " + vertices.get(i).getDistance());
