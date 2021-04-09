@@ -1,8 +1,10 @@
 public class Main {
     public static void main(String[] args) {
 
+        //Constructor kalder adjacencygraph og laver en ny.
         AdjacencyGraph graph=new AdjacencyGraph();
 
+        //Opretter alle de nødvendige verticies.
         Vertex eskildstrup  = new Vertex("Eskildstrup");
         Vertex haslev = new Vertex("Haslev");
         Vertex holbæk = new Vertex( "Holbæk");
@@ -20,7 +22,7 @@ public class Main {
         Vertex sorø = new Vertex("Sorø");
         Vertex vordingborg = new Vertex("Vordingborg");
 
-
+        //Tilføjer vertices til vores AdjacencyGraph.
         graph.addVertex(eskildstrup);    //0
         graph.addVertex(haslev);         //1
         graph.addVertex(holbæk);         //2
@@ -38,7 +40,8 @@ public class Main {
         graph.addVertex(sorø);           //14
         graph.addVertex(vordingborg);    //15
 
-// https://www.geeksforgeeks.org/prims-mst-for-adjacency-list-representation-greedy-algo-6/
+        // https://www.geeksforgeeks.org/prims-mst-for-adjacency-list-representation-greedy-algo-6/
+        //Vertices udfyldes med edges og distance for hver Vertex i vores AdjacencyGraph.
         graph.newEdge(eskildstrup, maribo, 28);
         graph.newEdge(eskildstrup, nykøbingF, 13);
         graph.newEdge(eskildstrup, vordingborg, 24);
@@ -95,10 +98,8 @@ public class Main {
 
         graph.newEdge(slagelse, sorø, 14);
 
-        //graph.printGraph();
-        //graph.MSTPrims();
-        //graph.printMST2();
-				graph.PrimsMST2();
+        //Kalder vores Prims metode
+        graph.PrimsMST();
 			
     }
 }

@@ -37,19 +37,26 @@ public class AdjacencyGraph {
 		}
 	}
 
+	// MST er kun de distancer som bliver hevet ud af Q
+	public void PrimsMST() {
 
-	public void PrimsMST2() {
-		
+		// https://www.geeksforgeeks.org/min-heap-in-java/
+		// https://codegym.cc/groups/posts/min-heap-in-java
 
 		MinHeap<Vertex> Q = new MinHeap<>();
 
-
+		// Vælger et arbitrært starting point her Arralyist (0)
 		if (vertices.size() > 0)
 			vertices.get(0).distance = 0;
 
 		for (int i = 0; i < vertices.size(); i++) {
 			Q.Insert(vertices.get(i));
 		}
+
+		// MST bliver lavet når den hiver en vertex ud, da den kun hiver den ud med den
+		// korteste distance.
+		// MST bliver "lavet" via predecessor en kant k og distance,
+
 		int MST = 0;
 		while (!Q.isEmpty()) {
 			Vertex u = Q.extractMin();
@@ -64,70 +71,13 @@ public class AdjacencyGraph {
 						Q.decreasekey(pos);
 					}
 				}
-			MST += u.distance;
+			MST += u.distance; // Kun distance mellem de vertices vi har hevet ud
 		}
 		int finalPrice = MST * 100000;
 		System.out.println("Weight of the MST is: " + MST + "km \n" + "The final price of the grid is: " + finalPrice + "kr \n");
 		for (int i = 0; i < vertices.size(); i++) {
 			if (vertices.get(i).predecessor != null)
 				System.out.println(" parent " + vertices.get(i).predecessor.getName() + " to " + vertices.get(i).getName() + " EdgeWeight: " + vertices.get(i).getDistance());
-		}
-	}
-	
-
-	// MST er kun de distancer som bliver hevet ud af Q
-	public void MSTPrims() {
-		// https://www.geeksforgeeks.org/min-heap-in-java/
-		// https://codegym.cc/groups/posts/min-heap-in-java
-
-		PriorityQueue<Vertex> Q = new PriorityQueue<Vertex>();
-
-		// Vælger et arbitrært starting point her Arralyist (0)
-		vertices.get(0).distance = 0;
-		Q.offer(vertices.get(0));
-
-		// MST bliver lavet når den hiver en vertex ud, da den kun hiver den ud med den
-		// korteste distance, PQ er bare en liste
-		// MST bliver "lavet" via predecessor og distance, distance er kun den distance
-		// i vores MST, dvs. de elementer der bliver hevet ud
-
-		int counter = 0;
-		int MST = 0;
-		// Når loopet har kørt går counteren 1 op og while loopet kører atter igen
-		while (!Q.isEmpty() && counter < vertices.size()) {
-			Vertex u = Q.poll();
-			// Poll henter og remover "head" af vores PQ eller returner null hvis vores
-			// queue er tom
-
-			if (!u.visited) {
-				for (int i = 0; i < u.getOutEdges().size(); i++) {
-					if ((!u.getOutEdges().get(i).getToVertex().visited)
-							&& u.getOutEdges().get(i).getWeight() < u.getOutEdges().get(i).getToVertex().distance) {
-						u.getOutEdges().get(i).getToVertex().distance = u.getOutEdges().get(i).getWeight();
-						u.getOutEdges().get(i).getToVertex().predecessor = u;
-						Q.offer(u.getOutEdges().get(i).getToVertex());
-					}
-				}
-
-				u.visited = true;
-				counter++; // Counter bliver lavet for at stoppe vores while loop, da PQ kan have flere af
-										// de
-				// samme elementer
-				MST += u.distance; // Kun distance mellem de vertices vi har hevet ud
-
-			}
-		}
-		int finalPrice = MST * 100000; // 100 kr pr. meter og der går 1000 meter på en kilometer.
-		System.out
-				.println("Weight of the MST is: " + MST + "km \n" + "The final price of the grid is: " + finalPrice + "kr \n");
-	}
-
-	public void printMST() {
-		for (int i = 0; i < vertices.size(); i++) {
-			if (vertices.get(i).predecessor != null) {
-				System.out.println(vertices.get(i).predecessor.getName() + " to " + vertices.get(i).getName() + " Edge Weight: "
-						+ vertices.get(i).distance + "km");
-			}
 		}
 	}
 }
